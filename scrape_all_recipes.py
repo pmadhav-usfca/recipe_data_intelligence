@@ -10,7 +10,11 @@ import math
 
 def all_recipes_review_url_stitch(api_url,doc_id,page,review_cnt):
     return api_url+doc_id+'&sort=DATE_DESC&offset='+str(page*100)+'&limit='+str(review_cnt)
-    
+
+def num_to_date(datenum):
+    day_delta=round((datenum/(86400*1000)),0)
+    new_date=datetime.strptime('12/31/1969','%m/%d/%Y')+timedelta(days=day_delta)
+    return new_date
 
 def all_recipes_scrape_recipe_page(url_list,ind,api_url,n_recipes):
     recipe_data=[]
@@ -77,9 +81,9 @@ def all_recipes_scrape_recipe_page(url_list,ind,api_url,n_recipes):
                                     else 0
             new_recipe['picture_cnt']=soup.find_all('div',class_='comp type--squirrel-link dialog-link recipe-review-bar__photo-count mntl-text-block')[0]\
                                           .text.strip('\n )(Photos').replace(',','')
-            new_recipe['publish_date']=datetime.strptime(soup.find_all('div',class_='mntl-attribution__item-date')[0].text.replace('Published on','')\
+            new_recipe['publish_date']=str(datetime.strptime(soup.find_all('div',class_='mntl-attribution__item-date')[0].text.replace('Published on','')\
                                            .replace('Updated on','').strip(' ')
-                                           ,'%B %d, %Y')
+                                           ,'%B %d, %Y').date())
             new_recipe['details']={k.find_all('div',class_="mntl-recipe-details__label")[0].text.strip('\n :'):
                                    k.find_all('div',class_="mntl-recipe-details__value")[0].text.strip('\n :') 
                                    for k in soup.find_all('div',class_='mntl-recipe-details__item')}
@@ -111,7 +115,12 @@ def all_recipes_scrape_recipe_page(url_list,ind,api_url,n_recipes):
                 for k in range(math.ceil(new_recipe['actual_review_cnt']/100)):
                     review_url2=all_recipes_review_url_stitch(api_url,new_recipe['doc_id'],k,new_recipe['review_cnt'])
                     review_response2=requests.get(review_url2)
-                    review_list+=review_response2.json()['list']
+                    review_json=review_response2.json()['list']
+                    for review in review_json:
+                        if 'created' in review.keys():
+                            review['created']=str(num_to_date(review['created']).date())
+                    review_list+=review_json
+            # if len(review_list)>0:
             new_recipe['reviews']=review_list
             recipe_data.append(new_recipe)
             # tmp_list1 = url_list[ind:]
