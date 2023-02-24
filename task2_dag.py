@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-
+import pickle
 from user_definition import *
 from scrape_all_recipes import *
 from google.cloud import storage
@@ -21,10 +21,10 @@ def _download_all_recipes_data():
         recipe_data,failed_urls,new_url_list=all_recipes_scrape_recipe_page(url_list,index,api_url,n_recipes)
         index+=len(recipe_data)+len(failed_urls)
         with pickle_data.open(mode='wb') as f:
-            pickle.dump(index, f)
+            pickle.dump(index, f) 
         with recipe_list_csv_file.open(mode='w') as f:
             f.write('\n'.join(new_url_list))
-        recipe_data_json_file = bucket.blob(recipe_data_json)
+        recipe_data_json_file = bucket.blob(recipe_data_json) 
         with recipe_data_json_file.open(mode='r') as f:
             recipe_data_curr=json.load(f)
         recipe_data_curr+=recipe_data

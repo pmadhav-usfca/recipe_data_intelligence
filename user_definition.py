@@ -12,5 +12,5 @@ collection_name = os.environ.get("MONGO_COLLECTION_NAME")
 all_recipes_api_url='https://www.allrecipes.com/servemodel/model.json?modelId=feedbacks&docId='
 recipe_list_csv=''
 recipe_index_pkl=''
-recipe_data_json=''
-n_recipes=10000
+recipe_data_json= 'recipe_data_json_file_gcs'
+n_recipes=100
