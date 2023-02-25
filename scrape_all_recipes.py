@@ -23,9 +23,9 @@ def all_recipes_scrape_recipe_page(url_list,ind,api_url,n_recipes):
     tmp_list1 = url_list[ind:]
     # for i,url in enumerate(url_list[ind:]):
     for i,url in enumerate(tmp_list1):
-        print(i)
+        # print(i)
         if i>=n_recipes:
-            print(i)
+            # print(i)
             break
         #i+=1
         try:
@@ -101,7 +101,7 @@ def all_recipes_scrape_recipe_page(url_list,ind,api_url,n_recipes):
                                           ,class_='comp recirc-section__card-list-1 card-list mntl-document-card-list mntl-card-list mntl-block'))>0\
                                       else []
             for sim_recip in new_recipe['similar_recipes']:
-                if sim_recip not in tmp_list1+url_list[:ind]:
+                if ('www.allrecipes.com/recipe/' in sim_recip) & (sim_recip not in tmp_list1+url_list[:ind]):
                     tmp_list1.append(sim_recip)
             #print(i,len(tmp_list1))
             new_recipe['doc_id']=re.findall('docId:(.*)', str(soup))[0].strip("' ")
