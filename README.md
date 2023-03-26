@@ -16,10 +16,10 @@ Data preprocessing: We cleaned some part of the data while data creation step it
 ### Step-3
 
 Connected Mongo to spark on databrick and used Spark ML to build the following models:
-1. Predict recipe/cuisine type of recipe. Created a simple model using Bag of Words and Logistic Regression. Relevant notebook is 'recipe_type_classification.ipynb'.
-2. Create recipe recommeder system. Using ingredients and cooking directions as features created embeddings for recipes through LaBSE sentence transformer model. Used cosine similarity to find similar recipes. Relevant notebook is 'recommending_similar_recipes.ipynb'.
-3. Create clustering model to group similar recipes. Used miniLM sbert model to create embeddings and created clusters using KMeans. Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
-4. Predict calories of recipe. Used miniLM sbert model to create embeddings and created randomForest model to predict calories.Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
-5. PCA to find lower dimension representation of recipes. Used miniLM sbert model to create embeddings and created PCA model to find lower dimension representation of recipes. Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
-6. Predict cooking time of recipe. Used miniLM sbert model to create embeddings, preprocessed through dense representation and created randomForest model to predict cooking time. Relevant notebook is 'cooking_time_prediction.ipynb'.
-7. Datasources matching. Used sentence transformer model to create embeddings and used cosine similarity to match recipes from different sources. Relevant notebook is 'recipe_matching_across_diff_datasources.ipynb'.
+1. **Predict recipe/cuisine type of recipe**. Created a simple model using Bag of Words and Logistic Regression. Relevant notebook is 'recipe_type_classification.ipynb'.
+2. **Create recipe recommeder system**. Using ingredients and cooking directions as features created embeddings for recipes through LaBSE sentence transformer model. Used cosine similarity to find similar recipes. Relevant notebook is 'recommending_similar_recipes.ipynb'.
+3. Create **clustering model** to group similar recipes. Used miniLM sbert model to create embeddings and created clusters using KMeans. Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
+4. **Predict calories of recipe**. Used miniLM sbert model to create embeddings and created randomForest model to predict calories.Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
+5. **PCA to find lower dimension representation** of recipes. Used miniLM sbert model to create embeddings and created PCA model to find lower dimension representation of recipes. Relevant notebook is 'Recipe_clustering_PCA_calorie_prediction.ipynb'.
+6. **Predict cooking time** of recipe. Used miniLM sbert model to create embeddings, preprocessed through dense representation and created randomForest model to predict cooking time. Relevant notebook is 'cooking_time_prediction.ipynb'.
+7. **Datasources matching**. Used sentence transformer model to create embeddings and used cosine similarity to match recipes from different sources. Relevant notebook is 'recipe_matching_across_diff_datasources.ipynb'.
